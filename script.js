@@ -4,17 +4,23 @@ const Gameboard = (() => {
                         ['O', 'X', 'O']];
 
     const render = () => {
-        const div = document.querySelector(".container");
+        const board = document.querySelector(".board");
         let cc = "";
 
         gameboard.forEach(row => {
-            row.forEach(column => {
-                cc += column + " ";
-            });
-            console.log(cc);
-            // console.log("\n");
-            cc = "";
 
+            const div = document.createElement("div");
+            let span;
+            div.classList.add("row");
+            board.appendChild(div);
+
+            row.forEach(column => {
+                span = document.createElement("span");
+                span.textContent = column;
+                console.log(column);
+                span.classList.add("column");
+                div.appendChild(span);
+            });
         });
     }
 
