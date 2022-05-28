@@ -1,4 +1,4 @@
-const Gameboard = (() => {
+const Game = (() => {
     let gameboard = [['', '', ''],
                         ['', '', ''],
                         ['', '', '']];
@@ -130,13 +130,4 @@ const Gameboard = (() => {
 })();
 
 
-const Player = (name) => {
-    return {name};
-}
-
-const Game = (() => {
-
-})
-
-
-Gameboard.render();
+Game.render();
