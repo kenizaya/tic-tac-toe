@@ -23,7 +23,6 @@ const Gameboard = (() => {
             if (isOver()) {
                 btn.textContent = "Play Again";
                 document.querySelectorAll("span").forEach(span => span.style.cssText = "pointer-events: none");
-
             }
             }
         
@@ -83,6 +82,14 @@ const Gameboard = (() => {
             } else if (gameboard[1][i] && (gameboard[0][i] === gameboard[1][i] &&
                 gameboard[1][i] === gameboard[2][i])) {
                     h2.textContent = `Congrats! ${gameboard[1][i]} won!`;
+                    return true;
+            } else if (gameboard[1][1] && (gameboard[0][0] === gameboard[1][1] &&
+                gameboard[1][1] === gameboard[2][2])) {
+                    h2.textContent = `Congrats! ${gameboard[1][1]} won!`;
+                    return true;
+            } else if (gameboard[1][1] && (gameboard[0][2] === gameboard[1][1] &&
+                gameboard[1][1] === gameboard[2][0])) {
+                    h2.textContent = `Congrats! ${gameboard[1][1]} won!`;
                     return true;
             }
     }
