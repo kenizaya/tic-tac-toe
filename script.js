@@ -66,3 +66,5 @@ const Player = (name) => {
 const Game = (() => {
 
 })
+
+Gameboard.render();
