@@ -38,7 +38,14 @@ const Gameboard = (() => {
                         e.target.textContent = marker;
                         gameboard[rIndex][cIndex] = marker;
                         marker = marker === "X" ? "O": "X";
-                    }
+
+                        // check if game won
+                        for (let i = 0; i < gameboard.length; i++) {
+                            if ((gameboard[i][1] && (gameboard[i][0] === gameboard[i][1] && gameboard[i][1] === gameboard[i][2])) ||
+                                (gameboard[1][i] && (gameboard[0][i] === gameboard[1][i] && gameboard[1][i] === gameboard[2][i]))) {
+                                    console.log(true);
+                                }
+                    }}
                     
                     console.log([rIndex, cIndex]);
                 })
