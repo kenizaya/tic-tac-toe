@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board {
+    width: 400px;
+    height: 400px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    font-size: 48px;
+    font-family: Roboto, sans-serif;
+    color: #243B53;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+.column {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
