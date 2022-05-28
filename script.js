@@ -1,12 +1,15 @@
 const Gameboard = (() => {
-    const gameboard = [['X', 'O', 'X'],
-                        ['O', ' ', 'O'],
-                        ['O', 'X', 'O']];
+    const gameboard = [['', '', ''],
+                        ['', '', ''],
+                        ['', '', '']];
 
     const render = () => {
         const board = document.querySelector(".board");
         let rowIndex = 0;
         let columnIndex = 0;
+        let rIndex;
+        let cIndex;
+        let marker = "X";
 
         gameboard.forEach(row => {
 
@@ -26,7 +29,22 @@ const Gameboard = (() => {
                 span.dataset.attr = columnIndex;
                 div.appendChild(span);
                 columnIndex++;
+
+                span.addEventListener('click', (e) => {
+                    rIndex = e.target.parentNode.dataset.attr;
+                    cIndex = e.target.dataset.attr;
+
+                    if (!e.target.textContent) {
+                        e.target.textContent = marker;
+                        gameboard[rIndex][cIndex] = marker;
+                        marker = marker === "X" ? "O": "X";
+                    }
+                    
+                    console.log([rIndex, cIndex]);
+                })
             });
+
+            
         });
     }
 
