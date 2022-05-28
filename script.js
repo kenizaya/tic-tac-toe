@@ -8,27 +8,46 @@ const Gameboard = (() => {
     const btn = document.querySelector("button");
     let rIndex;
     let cIndex;
-    let marker = "X";
     let turns = 0;
 
     const play = (e) => {
+        
         rIndex = e.target.parentNode.dataset.attr;
         cIndex = e.target.dataset.attr;
+        let brIndex = Math.floor(Math.random() * 3);
+        let bcIndex = Math.floor(Math.random() * 3);
+
 
         if (!e.target.textContent) {
+            let marker = "X";
             e.target.textContent = marker;
             gameboard[rIndex][cIndex] = marker;
-            marker = marker === "X" ? "O": "X";
             turns++;
+            marker = marker === "X" ? "O": "X";
+            
+            
 
             // check if game won
             if (isOver()) {
                 btn.textContent = "Play Again";
                 document.querySelectorAll("span").forEach(span => span.style.cssText = "pointer-events: none");
+            } else {
+                while (gameboard[brIndex][bcIndex] != "") {
+                    brIndex = Math.floor(Math.random() * 3);
+                    bcIndex = Math.floor(Math.random() * 3);   
+                }
+                const sp = document.querySelector(`div[data-attr="${brIndex}"] span[data-attr="${bcIndex}"]`);
+                gameboard[brIndex][bcIndex] = marker;
+                sp.textContent = marker;
+                turns++;
             }
+
+            if (isOver()) {
+                btn.textContent = "Play Again";
+                document.querySelectorAll("span").forEach(span => span.style.cssText = "pointer-events: none");
+            } 
+             
             }
-        
-        console.log([rIndex, cIndex]);
     }
 
     const render = () => {
@@ -47,7 +66,6 @@ const Gameboard = (() => {
             row.forEach(column => {
                 span = document.createElement("span");
                 span.textContent = column;
-                console.log(column);
                 span.classList.add("column");
                 span.dataset.attr = columnIndex;
                 div.appendChild(span);
@@ -75,30 +93,35 @@ const Gameboard = (() => {
     }
 
     const isOver = () => {
+        let winner;
+
         for (let i = 0; i < gameboard.length; i++) {
-            console.log(i);
             if (gameboard[i][1] && (gameboard[i][0] === gameboard[i][1] &&
                 gameboard[i][1] === gameboard[i][2])) {
-                    h2.textContent = `Congrats! ${gameboard[i][1]} won!`;
+                    winner = gameboard[i][1] === "X" ? "Congrats! You" : "OOPS! Bot";
+                    h2.textContent = `${winner} won!`;
                     return true;
 
             } else if (gameboard[1][i] && (gameboard[0][i] === gameboard[1][i] &&
                 gameboard[1][i] === gameboard[2][i])) {
-                    h2.textContent = `Congrats! ${gameboard[1][i]} won!`;
+                    winner = gameboard[1][i] === "X" ? "Congrats! You" : "OOPS! Bot";
+                    h2.textContent = `${winner} won!`;
                     return true;
             } else if (gameboard[1][1] && (gameboard[0][0] === gameboard[1][1] &&
                 gameboard[1][1] === gameboard[2][2])) {
-                    h2.textContent = `Congrats! ${gameboard[1][1]} won!`;
+                    winner = gameboard[1][1] === "X" ? "Congrats! You" : "OOPS! Bot";
+                    h2.textContent = `${winner} won!`;
                     return true;
             } else if (gameboard[1][1] && (gameboard[0][2] === gameboard[1][1] &&
                 gameboard[1][1] === gameboard[2][0])) {
-                    h2.textContent = `Congrats! ${gameboard[1][1]} won!`;
+                    winner = gameboard[1][1] === "X" ? "Congrats! You" : "OOPS! Bot";
+                    h2.textContent = `${winner} won!`;
                     return true;
             } else if (turns >= 9) {
                     h2.textContent = `It's a tie!`;
                     return true;
             }
-    }
+        }
     }
 
     btn.addEventListener('click', restart);
