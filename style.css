@@ -18,7 +18,7 @@ body {
 .header {
     background-color: antiquewhite;
     width: 100%;
-    height: 150px;
+    height: 140px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,4 +50,12 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+button {
+    padding: 24px 74px;
+    margin: 18px;
+    background-color: antiquewhite;
+    border: 2px solid #243B53;
+    font-size: 18px;
 }

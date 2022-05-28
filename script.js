@@ -1,10 +1,11 @@
 const Gameboard = (() => {
-    const gameboard = [['', '', ''],
+    let gameboard = [['', '', ''],
                         ['', '', ''],
                         ['', '', '']];
 
+    const board = document.querySelector(".board");
+
     const render = () => {
-        const board = document.querySelector(".board");
         let rowIndex = 0;
         let columnIndex = 0;
         let rIndex;
@@ -55,6 +56,19 @@ const Gameboard = (() => {
         });
     }
 
+    const btn = document.querySelector("button");
+
+    btn.addEventListener('click', () => {
+        gameboard = [['', '', ''],
+                    ['', '', ''],
+                    ['', '', '']];
+        while (board.hasChildNodes()) {
+            board.removeChild(board.firstChild);
+        }
+
+        render();
+    })
+
     return {render};
 })();
 
@@ -66,5 +80,6 @@ const Player = (name) => {
 const Game = (() => {
 
 })
+
 
 Gameboard.render();
