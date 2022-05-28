@@ -9,6 +9,7 @@ const Gameboard = (() => {
     let rIndex;
     let cIndex;
     let marker = "X";
+    let turns = 0;
 
     const play = (e) => {
         rIndex = e.target.parentNode.dataset.attr;
@@ -18,6 +19,7 @@ const Gameboard = (() => {
             e.target.textContent = marker;
             gameboard[rIndex][cIndex] = marker;
             marker = marker === "X" ? "O": "X";
+            turns++;
 
             // check if game won
             if (isOver()) {
@@ -62,6 +64,7 @@ const Gameboard = (() => {
         gameboard = [['', '', ''],
                     ['', '', ''],
                     ['', '', '']];
+        turns = 0;
         while (board.hasChildNodes()) {
             board.removeChild(board.firstChild);
         }
@@ -90,6 +93,9 @@ const Gameboard = (() => {
             } else if (gameboard[1][1] && (gameboard[0][2] === gameboard[1][1] &&
                 gameboard[1][1] === gameboard[2][0])) {
                     h2.textContent = `Congrats! ${gameboard[1][1]} won!`;
+                    return true;
+            } else if (turns >= 9) {
+                    h2.textContent = `It's a tie!`;
                     return true;
             }
     }
